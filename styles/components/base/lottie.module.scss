@@ -1,0 +1,11 @@
+.lottie {
+	width: 300px;
+	height: 300px;
+	overflow: hidden;
+	margin: 0 auto;
+	outline: none;
+
+	&.clickToPause {
+		cursor: pointer;
+	}
+}

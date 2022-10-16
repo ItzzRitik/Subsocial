@@ -1,0 +1,49 @@
+.forbidden {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	user-select: none;
+	justify-content: center;
+
+	> h1 {
+		font-size: 3em;
+		font-weight: 400;
+		margin: 0;
+		text-transform: capitalize;
+	}
+
+	> p {
+		margin: 0;
+		font-size: 1.4em;
+		font-weight: 300;
+		margin-bottom: 30px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.forbidden {
+		> .animation {
+			width: 60vw;
+			height: 60vw;
+		}
+
+		> h1 {
+			font-size: 8vw;
+		}
+
+		> p {
+			font-size: 3.8vw;
+		}
+
+		> .home {
+			padding: 2vw 5vw;
+
+			> p {
+				font-size: 3vw;
+			}
+		}
+	}
+}
