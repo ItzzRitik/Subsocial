@@ -11,15 +11,8 @@ const authOption = {
 	secret: process.env.NEXT_AUTH_SECRET,
 	callbacks: {
 		async signIn ({ profile }) {
-			const requestOption = {
-				method: 'POST',
-				headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` },
-				body: JSON.stringify({ query: '{  viewer { login }}' }),
-			};
-			const request = await fetch('https://api.github.com/graphql', requestOption);
-			const currentUser = (await request.json()).data.viewer.login.toLowerCase();
-
-			return currentUser.toLowerCase() === profile.login.toLowerCase() ? true : '/?error=403';
+			console.log(profile);
+			return true;
 		},
 		async redirect () {
 			return '/';

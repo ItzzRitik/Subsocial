@@ -1,5 +1,56 @@
 .home {
-	.login {
-		
+	position: relative;
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background: white;
+
+	> .login {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #FFF0;
+		backdrop-filter: blur(10px);
+		z-index: 99;
+
+		> .modal {
+			width: 500px;
+			display: flex;
+			background: white;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 30px 20px;
+			border-radius: 20px;
+
+			> .title {
+				font-size: 28px;
+				font-weight: 400;
+				color: black;
+				margin: 0 0 30px;
+			}
+
+			> .forbidden {
+				width: 100%;
+				height: 100%;
+				font-size: 0.8rem;
+				margin-bottom: 20px;
+			}
+
+			> .loginTwitter {
+				width: 340px;
+				height: 45px;
+				border: 1px solid var(--colorBorderPrimary);
+				border-radius: 999px;
+				color: black;
+
+			}
+		}
 	}
 }

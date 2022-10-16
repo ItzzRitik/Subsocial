@@ -21,8 +21,8 @@ const Home: NextPage = () => {
 							router?.query?.error == 403 ? <Forbidden className={styles.forbidden} />
 								: <h1 className={styles.title}>Authentication Required!</h1>
 						}
-						<Button className={styles.loginGithub} Icon={Twitter} label='sign in with twitter' back stopPropagation
-							onClick={() => signIn('github')}
+						<Button className={styles.loginTwitter} Icon={Twitter} label='sign in with twitter' back stopPropagation
+							onClick={() => signIn('twitter')}
 						/>
 					</div>
 				</div>

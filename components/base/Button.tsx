@@ -13,8 +13,9 @@ export default function Button (props) {
 			return onClick();
 		}
 	};
-	const IconComponent = Icon ? <Icon className={styles.icon} /> : image ?
-		<span className={styles.image} style={{ backgroundImage: `url(${image})` }} /> : '';
+
+	const IconComponent = Icon ? <Icon className={styles.icon} /> : (image ?
+		<span className={styles.image} style={{ backgroundImage: `url(${image})` }} /> : '');
 
 	let buttonClass = styles.button;
 	className && (buttonClass += ` ${className}`);
