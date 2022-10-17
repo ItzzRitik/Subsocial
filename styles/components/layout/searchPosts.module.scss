@@ -57,6 +57,11 @@
 			margin-right: 25px;
 			stroke: var(--colorAccent);
 		}
+		> .loader {
+			position: absolute;
+			right: var(--pagePadding);
+			margin-right: 25px;
+		}
 	}
 	> .posts {
 		position: relative;

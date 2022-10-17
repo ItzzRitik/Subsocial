@@ -8,18 +8,20 @@ import Search from '../../assets/icons/search.svg';
 import Twitter from '../../assets/icons/twitter.svg';
 import styles from '../../styles/components/layout/searchPosts.module.scss';
 
+import Loader from './Loader';
 import PostCard from './PostCard';
 
 export default function SearchPosts () {
-	const { data: session } = useSession();
 	const router = useRouter();
 	const { search } = router.query;
 	const [tweets, setTweets] = useState([]);
+	const [loading, setLoading] = useState(false);
 
 	const fetchTweets = useRef(debounce(async (value) => {
+		setLoading(true);
 		const req = await fetch(`/api/twitter/search?q=${value}`);
 		const { data = [] } = await req.json();
-
+		setLoading(false);
 		if (!value) setTweets([]);
 		else setTweets(data);
 
@@ -41,7 +43,7 @@ export default function SearchPosts () {
 					placeholder='Search tweets'
 				/>
 				<Twitter className={styles.twitterIcon} />
-				<Search className={styles.searchIcon} />
+				{loading ? <Loader className={styles.loader} small /> : <Search className={styles.searchIcon} />}
 			</div>
 			<div className={styles.posts}>
 				{

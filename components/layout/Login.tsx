@@ -19,7 +19,7 @@ export default function Login () {
 		<div className={styles.modal}>
 			{
 				router?.query?.error == '403' ? <Forbidden className={styles.forbidden} />
-					: <h1 className={styles.title}>Authentication Required!</h1>
+					: <h1 className={styles.title}>Welcome to Subsocial!</h1>
 			}
 			<Button className={styles.loginTwitter} Icon={Twitter} label='sign in with twitter' back stopPropagation
 				onClick={() => signIn('twitter')}

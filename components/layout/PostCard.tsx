@@ -1,5 +1,6 @@
 import { waitReady } from '@polkadot/wasm-crypto';
 import { IpfsContent } from '@subsocial/types/substrate/classes';
+import { useSession } from 'next-auth/react';
 
 import Cloud from '../../assets/icons/cloud.svg';
 import styles from '../../styles/components/layout/postCard.module.scss';
@@ -7,6 +8,7 @@ import Button from '../base/Button';
 import { useSubsocial } from '../provider';
 
 export default function PostCard ({ post }: PropTypes) {
+	const { data: session } = useSession();
 	const {
 		id,
 		created_at,
@@ -20,6 +22,7 @@ export default function PostCard ({ post }: PropTypes) {
 	const onBackup = async () => {
 		await waitReady();
 		const cid = await api.ipfs.saveContent({
+			backupOwner: session?.screen_name,
 			id,
 			text,
 			hashtags,
@@ -34,7 +37,7 @@ export default function PostCard ({ post }: PropTypes) {
 			{ RegularPost: null },
 			IpfsContent(cid),
 		);
-		postTransaction.signAndSend(keyring, async (result) => {
+		postTransaction.signAndSend(keyring, async (result: ResultType) => {
 			const { status } = result;
 
 			if (!result || !status) {
@@ -101,4 +104,16 @@ interface PropTypes {
 			profile_image_url_https: string;
 		};
 	};
+}
+
+interface ResultType {
+	isError: boolean;
+	status: {
+		type: string;
+		isFinalized: boolean
+		asFinalized: string
+		isInBlock: boolean
+		asInBlock: string
+		isError: string
+	}
 }

@@ -10,14 +10,50 @@ export default NextAuth({
 	],
 	secret: process.env.NEXT_AUTH_SECRET,
 	callbacks: {
-		async jwt ({ token, account }) {
+		async jwt ({ token, account, profile }: {token: TokenType, account: AccountType, profile: ProfileType}) {
+			if (profile) {
+				token.userProfile = {
+					screen_name: profile.screen_name,
+					location: profile.location,
+					description: profile.description,
+					followers_count: profile.followers_count,
+					friends_count: profile.friends_count,
+					favourites_count: profile.favourites_count,
+					verified: profile.verified,
+				};
+			}
 			if (account) {
-				token['credentials'] = {
+				token.credentials = {
 					authToken: account.oauth_token,
 					authSecret: account.oauth_token_secret,
 				};
 			}
 			return token;
 		},
+		async session ({ session, token }) {
+			const { userProfile } = token;
+			session.user = { ...session.user, ...userProfile };
+			return session;
+		},
 	},
 });
+
+interface AccountType {
+	oauth_token: string;
+	oauth_token_secret: string;
+}
+
+interface TokenType {
+	userProfile: ProfileType;
+	credentials: AccountType;
+}
+
+interface ProfileType {
+	screen_name: string;
+	location: string;
+	description: string;
+	followers_count: string;
+	friends_count: string;
+	favourites_count: string;
+	verified: string;
+}
