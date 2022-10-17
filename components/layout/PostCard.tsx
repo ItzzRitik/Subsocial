@@ -70,14 +70,14 @@ export default function PostCard ({ post }: PropTypes) {
 					}}
 				/>
 				<div className={styles.userData}>
-					<p className={styles.name}>{user.name}</p>
-					<p className={styles.userName}>@{user.screen_name}</p>
+					<p className={styles.name} title={user.name}>{user.name}</p>
+					<p className={styles.userName} title={user.screen_name}>@{user.screen_name}</p>
 				</div>
 				<Button
 					className={styles.backup}
 					Icon={Cloud}
 					onClick={onBackup}
-					tooltip='sign out'
+					tooltip='Backup to subsocial'
 					back
 					stopPropagation
 				/>

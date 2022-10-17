@@ -17,26 +17,31 @@
 	> .header {
 		position: relative;
 		display: flex;
+		width: 100%;
 		height: 50px;
 		align-items: center;
 
 		> .avatar {
 			display: block;
-			width: 40px;
-			height: 40px;
+			min-width: 40px;
+			min-height: 40px;
 			border-radius: 999px;
 			justify-content: center;
 			background-size: cover;
 		}
 		> .userData {
 			display: flex;
+			width: 100%;
 			flex-direction: column;
 			margin-left: 10px;
 			justify-content: center;
+			margin-right: 40px;
 
 			> p {
+				height: 15px;
+				line-height: 15px;
 				margin: 0;
-				line-height: 1;
+				overflow: hidden;
 
 				&.name {
 					font-weight: 500;
