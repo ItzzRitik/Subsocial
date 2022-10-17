@@ -1,0 +1,59 @@
+.postCard {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 200px;
+	padding: 1rem;
+	border: 1px solid #eaeaea;
+	border-radius: 10px;
+	transition: color 0.15s ease, border-color 0.15s ease;
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		border-color: var(--colorAccent);
+	}
+
+	> .header {
+		display: flex;
+		height: 50px;
+		align-items: center;
+
+		> .avatar {
+			display: block;
+			width: 40px;
+			height: 40px;
+			border-radius: 999px;
+			justify-content: center;
+		}
+		> .userData {
+			display: flex;
+			flex-direction: column;
+			margin-left: 10px;
+			justify-content: center;
+
+			> p {
+				margin: 0;
+				line-height: 1;
+
+				&.name {
+					font-weight: 500;
+					font-size: 14px;
+				}
+				&.userName {
+					font-weight: 300;
+					font-size: 12px;
+				}
+			}
+			
+		}
+	}
+	> .content {
+		> .postText {
+			margin: 0;
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 1.5;
+		}
+	}
+}
