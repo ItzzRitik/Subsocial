@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import NextAuth from 'next-auth';
 import TwitterProvider from 'next-auth/providers/twitter';
 

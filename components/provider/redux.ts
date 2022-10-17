@@ -7,10 +7,6 @@ export const profileSlice = createSlice({
 		profile: {},
 	},
 	reducers: {
-		iconMoon: (state) => {
-		},
-		iconSun: (state) => {
-		},
 	},
 });
 

@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { waitReady } from '@polkadot/wasm-crypto';
 import { IpfsContent } from '@subsocial/types/substrate/classes';
 import { useSession } from 'next-auth/react';
@@ -22,7 +25,7 @@ export default function PostCard ({ post }: PropTypes) {
 	const onBackup = async () => {
 		await waitReady();
 		const cid = await api.ipfs.saveContent({
-			backupOwner: session?.screen_name,
+			backupOwner: session?.screen_name ?? '',
 			id,
 			text,
 			hashtags,

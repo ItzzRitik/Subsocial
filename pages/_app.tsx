@@ -6,6 +6,8 @@ import '../styles/globals.scss';
 import type { AppProps } from 'next/app';
 
 export default function MyApp (props: AppProps) {
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	const { Component, pageProps: { session, ...pageProps } } = props;
 
 	return (

@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { getToken } from 'next-auth/jwt';
 import { getSession } from 'next-auth/react';
 import TwitterClient from 'twitter-lite';

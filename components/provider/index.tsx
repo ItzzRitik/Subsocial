@@ -4,7 +4,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 import store from './redux';
 import { SubsocialProvider } from './subsocial';
 
-export default function GlobalContextProvider ({ children, session }) {
+export default function GlobalContextProvider ({ children, session }: {children: any, session: any}) {
 	return (
 		<ReduxProvider store={store}>
 			<SubsocialProvider>

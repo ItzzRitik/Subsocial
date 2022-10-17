@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import debounce from 'lodash/debounce';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 import Search from '../../assets/icons/search.svg';

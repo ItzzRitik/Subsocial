@@ -1,6 +1,6 @@
 import styles from '../../styles/components/layout/loader.module.scss';
 
-export default function Loader (props) {
+export default function Loader (props: PropType) {
 	const { className, fullPage, medium, small } = props;
 	let classList = styles.loader;
 	className && (classList += ` ${className}`);
@@ -13,4 +13,11 @@ export default function Loader (props) {
 			<span />
 		</div>
 	);
+}
+
+interface PropType {
+	className?: string;
+	fullPage?: boolean;
+	medium?: boolean;
+	small?: boolean;
 }
