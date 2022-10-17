@@ -4,6 +4,8 @@
 import { waitReady } from '@polkadot/wasm-crypto';
 import { IpfsContent } from '@subsocial/types/substrate/classes';
 import { useSession } from 'next-auth/react';
+import SweetAlert from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 import Cloud from '../../assets/icons/cloud.svg';
 import styles from '../../styles/components/layout/postCard.module.scss';
@@ -21,6 +23,7 @@ export default function PostCard ({ post }: PropTypes) {
 		user,
 	} = post;
 	const { api, keyring } = useSubsocial();
+	const Swal = withReactContent(SweetAlert);
 
 	const onBackup = async () => {
 		await waitReady();
@@ -52,13 +55,20 @@ export default function PostCard ({ post }: PropTypes) {
 					? status.asFinalized
 					: status.asInBlock;
 
-				console.log(
-					`✅ Tx finalized. Block hash: ${blockHash.toString()}`,
-				);
+				Swal.fire({
+					icon: 'success',
+					title: 'Backup Successful!',
+					text: `Block hash for the transaction: ${blockHash.toString()}`,
+				});
 			} else if (result.isError) {
 				console.log(JSON.stringify(result));
 			} else {
-				console.log(`⏱ Current tx status: ${status.type}`);
+				Swal.fire({
+					icon: 'success',
+					title: 'Backup Initiated!',
+					text: `⏱ Current tx status: ${status.type}`,
+					timer: 4000,
+				});
 			}
 		});
 	};
