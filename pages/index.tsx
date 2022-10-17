@@ -1,32 +1,23 @@
-import { useSession, signIn, signOut } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
-import Twitter from '../assets/icons/twitter.svg';
-import Button from '../components/base/Button';
-import Forbidden from '../components/layout/Forbidden';
+import Loader from '../components/layout/Loader';
+import Login from '../components/layout/Login';
+import SearchPosts from '../components/layout/SearchPosts';
 import styles from '../styles/Home.module.scss';
 
 import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
-	const router = useRouter();
+
+	if (session === undefined) {
+		return <Loader fullPage />;
+	}
+
 	return (
 		<div className={styles.home}>
-			{
-				!session &&
-				<div className={styles.login}>
-					<div className={styles.modal}>
-						{
-							router?.query?.error == 403 ? <Forbidden className={styles.forbidden} />
-								: <h1 className={styles.title}>Authentication Required!</h1>
-						}
-						<Button className={styles.loginTwitter} Icon={Twitter} label='sign in with twitter' back stopPropagation
-							onClick={() => signIn('twitter')}
-						/>
-					</div>
-				</div>
-			}
+			<SearchPosts />
+			<Login />
 		</div>
 	);
 };

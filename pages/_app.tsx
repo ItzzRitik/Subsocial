@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import GlobalContextProvider from '../components/context';
+import GlobalContextProvider from '../components/provider';
 import '../styles/globals.scss';
 
 import type { AppProps } from 'next/app';

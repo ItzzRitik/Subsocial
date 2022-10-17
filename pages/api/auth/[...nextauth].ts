@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import TwitterProvider from 'next-auth/providers/twitter';
 
-const authOption = {
+export default NextAuth({
 	providers: [
 		TwitterProvider({
 			clientId: process.env.TWITTER_CONSUMER_KEY,
@@ -10,15 +10,14 @@ const authOption = {
 	],
 	secret: process.env.NEXT_AUTH_SECRET,
 	callbacks: {
-		async signIn ({ profile }) {
-			console.log(profile);
-			return true;
-		},
-		async redirect () {
-			return '/';
+		async jwt ({ token, account }) {
+			if (account) {
+				token['credentials'] = {
+					authToken: account.oauth_token,
+					authSecret: account.oauth_token_secret,
+				};
+			}
+			return token;
 		},
 	},
-};
-const Authenticate = (req, res) => NextAuth(req, res, authOption);
-
-export default Authenticate;
+});

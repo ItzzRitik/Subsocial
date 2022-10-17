@@ -10,19 +10,27 @@ body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	background-color: white;
 
 	// Gradients
-	--gradientViolet: linear-gradient(320deg, #3f00e6, #962cff);
+	--gradientTwitter: linear-gradient(320deg, #1DA1F2, #1d64f2);
 	--gradientWhite: linear-gradient(120deg, #edf1f4 10%, #c3cbdc);
-	--gradientBackground: var(--gradientViolet);
-	--colorBorderPrimary: #abb0bb;
-	--colorAccent: #7f51ff;
+	--gradientBackground: var(--gradientTwitter);
+	--colorBorderPrimary: #3f3f3f;
+	--colorAccent: #1DA1F2;
 	--headerThickness: 100px;
+
 }
 
 #__next {
 	width: 100%;
 	height: 100%;
+	background-color: white;
+
+	::selection {
+		color: white;
+		background: var(--colorAccent);
+	}
 }
 
 a {
@@ -32,14 +40,5 @@ a {
 
 * {
 	box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-	html {
-		color-scheme: dark;
-	}
-	body {
-		color: white;
-		background: black;
-	}
+	font-family: 'Montserrat', sans-serif
 }
