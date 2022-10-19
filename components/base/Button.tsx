@@ -1,10 +1,12 @@
+import { MouseEvent, MouseEventHandler } from 'react';
+
 import clsx from 'clsx';
 
 import styles from '../../styles/components/base/button.module.scss';
 
 export default function Button (props: PropTypes) {
 	const { className, Icon, image, label = '', tooltip, back, link, reverse, newTab, onClick, stopPropagation } = props;
-	const performClick = (event: any) => {
+	const performClick: MouseEventHandler<HTMLDivElement> = (event: MouseEvent<HTMLDivElement>) => {
 		if (stopPropagation) event.stopPropagation();
 		if (link) {
 			return newTab ? window.open(link, '_blank') : '';

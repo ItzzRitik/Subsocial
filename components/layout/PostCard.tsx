@@ -89,8 +89,12 @@ export default function PostCard ({ post }: PropTypes) {
 					}}
 				/>
 				<div className={styles.userData}>
-					<p className={styles.name} title={user.name}>{user.name}</p>
-					<p className={styles.userName} title={user.screen_name}>@{user.screen_name}</p>
+					<p className={styles.name} title={user.name}>
+						{user.name}
+					</p>
+					<p className={styles.userName} title={user.screen_name}>
+						@{user.screen_name}
+					</p>
 				</div>
 				<Button
 					className={styles.backup}
@@ -101,7 +105,15 @@ export default function PostCard ({ post }: PropTypes) {
 					stopPropagation
 				/>
 			</div>
-			<div className={styles.content}>
+			<div
+				className={styles.content}
+				onClick={() =>
+					window.open(
+						`https://twitter.com/twitter/status/${id_str}`,
+						'_blank',
+					)
+				}
+			>
 				<p className={styles.postText}>{text}</p>
 			</div>
 		</div>
@@ -129,10 +141,10 @@ interface ResultType {
 	isError: boolean;
 	status: {
 		type: string;
-		isFinalized: boolean
-		asFinalized: string
-		isInBlock: boolean
-		asInBlock: string
-		isError: string
-	}
+		isFinalized: boolean;
+		asFinalized: string;
+		isInBlock: boolean;
+		asInBlock: string;
+		isError: string;
+	};
 }

@@ -23,7 +23,6 @@ export default async function Search (req, res) {
 		access_token_key: credentials.authToken,
 		access_token_secret: credentials.authSecret,
 	});
-	console.log('q', q);
 
 	let request = {
 		endpoint: 'search/tweets',

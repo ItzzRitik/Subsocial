@@ -1,24 +1,40 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { configureStore, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// create a slice
-export const profileSlice = createSlice({
-	name: 'profile',
+export const fetchTweets = createAsyncThunk('test/fetchTweets', async (query: string | undefined) => {
+	if (!query) return [];
+
+	const req = await fetch(`/api/twitter/search?q=${encodeURIComponent(query)}`);
+	const { data = [] } = await req.json();
+
+	return data;
+});
+
+export const tweetsSlice = createSlice({
+	name: 'tweets',
 	initialState: {
-		profile: {},
+		tweets: [],
+		loading: false,
 	},
-	reducers: {
+	reducers: {},
+	extraReducers: (builder) => {
+		builder.addCase(fetchTweets.fulfilled, (state, { payload }) => ({
+			...state,
+			tweets: payload,
+			loading: false,
+		}));
+		builder.addCase(fetchTweets.pending, (state) => ({
+			...state,
+			loading: true,
+		}));
 	},
 });
 
-// config the store
 const store = configureStore({
 	reducer: {
-		icon: profileSlice.reducer,
+		tweets: tweetsSlice.reducer,
 	},
 });
 
-// export default the store
 export default store;
-
-// export the action
-export const iconAction = profileSlice.actions;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

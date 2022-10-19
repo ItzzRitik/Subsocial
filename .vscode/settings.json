@@ -12,6 +12,7 @@
 		"favourites",
 		"ipfs",
 		"polkadot",
-		"Swal"
+		"Swal",
+		"sweetalert"
 	]
 }
