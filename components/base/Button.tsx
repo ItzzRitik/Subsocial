@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import styles from '../../styles/components/base/button.module.scss';
 
 export default function Button (props: PropTypes) {
@@ -15,15 +17,17 @@ export default function Button (props: PropTypes) {
 	const IconComponent = Icon ? <Icon className={styles.icon} /> : (image ?
 		<span className={styles.image} style={{ backgroundImage: `url(${image})` }} /> : '');
 
-	let buttonClass = styles.button;
-	className && (buttonClass += ` ${className}`);
-	(Icon || image) && (buttonClass += ` ${styles.icon}`);
-	back && (buttonClass += ` ${styles.back}`);
-	link && (buttonClass += ` ${styles.link}`);
-	label && (buttonClass += ` ${styles.label}`);
+	const classList = clsx(
+		styles.button,
+		className,
+		(Icon || image) && styles.icon,
+		back && styles.back,
+		link && styles.link,
+		label && styles.label,
+	);
 
 	return (
-		<div className={buttonClass} title={tooltip ? tooltip : label} onClick={performClick}>
+		<div className={classList} title={tooltip ? tooltip : label} onClick={performClick}>
 			{back ? <span className={styles.background} /> : null}
 			{!reverse && IconComponent}
 			{label && <p className={styles.label}>{label}</p>}

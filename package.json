@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^1.8.6",
     "@subsocial/api": "0.7.2",
     "@subsocial/types": "^0.6.8",
+    "clsx": "^1.2.1",
     "lodash": "^4.17.21",
     "lottie-web": "^5.9.6",
     "next": "12.3.1",

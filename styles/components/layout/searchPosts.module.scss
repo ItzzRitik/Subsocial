@@ -49,13 +49,16 @@
 			height: 25px;
 			margin-left: 25px;
 		}
-		> .searchIcon {
+		> .searchIcon, > .avatarIcon {
 			position: absolute;
 			right: var(--pagePadding);
 			width: 25px;
 			height: 25px;
 			margin-right: 25px;
 			stroke: var(--colorAccent);
+		}
+		> .avatarIcon {
+			fill: var(--colorAccent);
 		}
 		> .loader {
 			position: absolute;

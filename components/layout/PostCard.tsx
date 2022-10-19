@@ -15,26 +15,32 @@ import { useSubsocial } from '../provider';
 export default function PostCard ({ post }: PropTypes) {
 	const { data: session } = useSession();
 	const {
-		id,
+		id_str,
 		created_at,
 		entities: { hashtags },
 		lang,
 		text,
 		user,
 	} = post;
+
 	const { api, keyring } = useSubsocial();
 	const Swal = withReactContent(SweetAlert);
 
 	const onBackup = async () => {
 		await waitReady();
 		const cid = await api.ipfs.saveContent({
-			backupOwner: session?.screen_name ?? '',
-			id,
-			text,
-			hashtags,
-			lang,
-			user,
-			created_at,
+			title: user.name,
+			image: user.profile_image_url_https,
+			tags: hashtags,
+			body: text,
+			canonical: `https://twitter.com/twitter/status/${id_str}`,
+			twitterData: {
+				id_str,
+				backupOwner: session?.screen_name ?? '',
+				lang,
+				user,
+				created_at,
+			},
 		});
 		const substrateApi = await api.blockchain.api;
 		const spaceId = '10102';

@@ -23,14 +23,31 @@ export default async function Search (req, res) {
 		access_token_key: credentials.authToken,
 		access_token_secret: credentials.authSecret,
 	});
+	console.log('q', q);
+
+	let request = {
+		endpoint: 'search/tweets',
+		body: {
+			q,
+			result_type: 'recent',
+		},
+		getResponse: (results) => results.statuses,
+	};
+	if (q.startsWith('@')) {
+		request = {
+			endpoint: 'statuses/user_timeline',
+			body: {
+				screen_name: q.substring(1),
+			},
+			getResponse: (results) => results,
+		};
+	}
 
 	try {
-		const results = await client.get('search/tweets', {
-			q,
-		});
+		const results = await client.get(request.endpoint, request.body);
 		return res.status(200).json({
 			status: 'Ok',
-			data: results.statuses,
+			data: request.getResponse(results),
 		});
 	} catch (err) {
 		return res.status(400).json({
