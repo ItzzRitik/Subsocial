@@ -47,16 +47,16 @@ export default function SearchPosts () {
 		}
 	}, [search, searchQuery]);
 
-	const onInput = ({ target }: {target: TargetValue}) => {
-		setSearch(target.value);
-		router.query.search = target.value;
+	const onInput = (value: string) => {
+		setSearch(value);
+		router.query.search = value;
 		router.replace(pick(router, ['pathname', 'query']), undefined, { shallow: true });
 	};
 
 	return (
 		<div className={`${styles.searchPosts} ${tweets?.length > 0 ? styles.show : ''}`}>
 			<div className={styles.searchBox}>
-				<input value={search} onChange={onInput}
+				<input value={search} onChange={({ target }) => onInput(target.value)}
 					placeholder='Search by tweets, #hashtags or @username'
 				/>
 				<Twitter className={styles.twitterIcon} />
@@ -65,14 +65,10 @@ export default function SearchPosts () {
 			<div className={styles.posts}>
 				{
 					tweets?.map((tweet, index) =>
-						<PostCard key={index} post={tweet} />,
+						<PostCard key={index} post={tweet} onInput={onInput} />,
 					)
 				}
 			</div>
 		</div>
 	);
-}
-
-interface TargetValue {
-	value: string
 }

@@ -4,6 +4,7 @@
 import { waitReady } from '@polkadot/wasm-crypto';
 import { IpfsContent } from '@subsocial/types/substrate/classes';
 import { useSession } from 'next-auth/react';
+import ReactHashtag from 'react-hashtag';
 import SweetAlert from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -12,7 +13,7 @@ import styles from '../../styles/components/layout/postCard.module.scss';
 import Button from '../base/Button';
 import { useSubsocial } from '../provider';
 
-export default function PostCard ({ post }: PropTypes) {
+export default function PostCard ({ post, onInput }: PropTypes) {
 	const { data: session } = useSession();
 	const {
 		id_str,
@@ -88,7 +89,13 @@ export default function PostCard ({ post }: PropTypes) {
 						backgroundImage: `url(${user.profile_image_url_https})`,
 					}}
 				/>
-				<div className={styles.userData}>
+				<div className={styles.userData} onClick={() =>
+					window.open(
+						`https://twitter.com/twitter/status/${id_str}`,
+						'_blank',
+					)
+				}
+				>
 					<p className={styles.name} title={user.name}>
 						{user.name}
 					</p>
@@ -105,22 +112,19 @@ export default function PostCard ({ post }: PropTypes) {
 					stopPropagation
 				/>
 			</div>
-			<div
-				className={styles.content}
-				onClick={() =>
-					window.open(
-						`https://twitter.com/twitter/status/${id_str}`,
-						'_blank',
-					)
-				}
-			>
-				<p className={styles.postText}>{text}</p>
+			<div className={styles.content}>
+				<p className={styles.postText}>
+					<ReactHashtag onHashtagClick={onInput}>
+						{text}
+					</ReactHashtag>
+				</p>
 			</div>
 		</div>
 	);
 }
 
 interface PropTypes {
+	onInput: (value: string) => void;
 	post: {
 		id: number;
 		created_at: string;
