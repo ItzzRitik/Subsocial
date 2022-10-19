@@ -7,7 +7,7 @@
 	display: flex;
 	flex-direction: column;
 	transform: translateY(calc(50vh - 60px));
-	transition: transform 0.3s ease;
+	transition: transform 0.3s ease-out;
 
 	&.show {
 		transform: translateY(0);
@@ -21,6 +21,7 @@
 		align-items: center;
 		padding: 0 var(--pagePadding);
 		justify-content: center;
+		transition: padding 0.3s ease-out;
 
 		> input {
 			width: 100%;
@@ -46,12 +47,16 @@
 			}
 		}
 
+		> svg {
+			transition: left 0.3s ease-out, right 0.3s ease-out;
+		}
 		> .twitterIcon {
 			position: absolute;
 			left: var(--pagePadding);
 			width: 25px;
 			height: 25px;
 			margin-left: 25px;
+
 		}
 		> .searchIcon, > .avatarIcon {
 			position: absolute;
@@ -77,5 +82,48 @@
 		padding: 50px;
 		grid-template-columns: repeat(3, 2fr);
 		gap: 10px
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	.searchPosts {
+		> .posts {
+			grid-template-columns: repeat(2, 2fr);
+		}
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.searchPosts {
+		--pagePadding: 100px;
+		> .posts {
+			padding: 30px 20px;
+		}
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.searchPosts {
+		> .posts {
+			grid-template-columns: repeat(1, 2fr);
+		}
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.searchPosts {
+		--pagePadding: 20px;
+		
+		&.show {
+			transform: translateY(80px);
+		}
+	}
+}
+
+@media screen and (max-width: 450px) {
+	.searchPosts {
+		> .posts {
+			padding: 20px 10px;
+		}
 	}
 }
