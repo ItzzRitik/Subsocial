@@ -1,4 +1,9 @@
 export default function HashTag ({ value, textClass, hashtagClass, usernameClass, onClick }: PropTypes) {
+	const onClickHandler = (event: any, word: string, type: string) => {
+		event.stopPropagation();
+		onClick(word, type);
+	};
+
 	return (
 		<p className={textClass}>
 			{
@@ -6,7 +11,9 @@ export default function HashTag ({ value, textClass, hashtagClass, usernameClass
 					if (word.length > 1) {
 						if (word.startsWith('#')) {
 							return (
-								<span className={hashtagClass} key={index} onClick={() => onClick(word, 'hashtag')}>
+								<span className={hashtagClass} key={index}
+									onClick={(event) => onClickHandler(event, word, 'hashtag')}
+								>
 									{word + ' '}
 								</span>
 							);
@@ -14,7 +21,9 @@ export default function HashTag ({ value, textClass, hashtagClass, usernameClass
 						if (word.startsWith('@')) {
 							word = word.replace(':', '');
 							return (
-								<span className={usernameClass} key={index} onClick={() => onClick(word, 'username')}>
+								<span className={usernameClass} key={index}
+									onClick={(event) => onClickHandler(event, word, 'username')}
+								>
 									{word + ' '}
 								</span>
 							);
