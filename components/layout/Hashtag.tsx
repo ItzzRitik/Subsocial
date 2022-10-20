@@ -12,6 +12,7 @@ export default function HashTag ({ value, textClass, hashtagClass, usernameClass
 							);
 						}
 						if (word.startsWith('@')) {
+							word = word.replace(':', '');
 							return (
 								<span className={usernameClass} key={index} onClick={() => onClick(word, 'username')}>
 									{word + ' '}

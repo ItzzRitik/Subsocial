@@ -11,6 +11,7 @@
 	&:hover,
 	&:focus {
 		border-color: var(--colorAccent);
+		box-shadow:  0px 0px 10px -5px var(--colorAccent);
 	}
 
 	> .header {
@@ -28,6 +29,7 @@
 			border-radius: 999px;
 			justify-content: center;
 			background-size: cover;
+			cursor: pointer;
 		}
 		> .userData {
 			display: flex;
@@ -67,11 +69,20 @@
 		}
 	}
 	> .content {
+		flex: 1;
+		cursor: pointer;
+
 		> .postText {
 			margin: 0;
 			font-weight: 400;
 			font-size: 14px;
 			line-height: 1.5;
+			word-break: break-all;
+			display: -webkit-box;
+			-webkit-line-clamp: 5;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
 
 			> .hashtag, > .username {
 				color: var(--colorAccent);

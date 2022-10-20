@@ -89,14 +89,11 @@ export default function PostCard ({ post, onInput }: PropTypes) {
 					style={{
 						backgroundImage: `url(${user.profile_image_url_https})`,
 					}}
+					onClick={() =>
+						window.open(`https://twitter.com/${user.screen_name}`, '_blank')
+					}
 				/>
-				<div className={styles.userData} onClick={() =>
-					window.open(
-						`https://twitter.com/twitter/status/${id_str}`,
-						'_blank',
-					)
-				}
-				>
+				<div className={styles.userData} onClick={() => onInput(`@${user.screen_name}`, true)}>
 					<p className={styles.name} title={user.name}>
 						{user.name}
 					</p>
@@ -113,7 +110,10 @@ export default function PostCard ({ post, onInput }: PropTypes) {
 					stopPropagation
 				/>
 			</div>
-			<div className={styles.content}>
+			<div className={styles.content} onClick={() =>
+				window.open(`https://twitter.com/twitter/status/${id_str}`, '_blank')
+			}
+			>
 				<HashTag textClass={styles.postText} hashtagClass={styles.hashtag}
 					usernameClass={styles.username} value={text}
 					onClick={(val) => onInput(val, true)}
