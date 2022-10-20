@@ -1,5 +1,4 @@
 import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 
 import Twitter from '../../assets/icons/twitter.svg';
 import styles from '../../styles/components/layout/login.module.scss';
