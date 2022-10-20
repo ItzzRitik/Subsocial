@@ -4,7 +4,6 @@
 import { waitReady } from '@polkadot/wasm-crypto';
 import { IpfsContent } from '@subsocial/types/substrate/classes';
 import { useSession } from 'next-auth/react';
-import ReactHashtag from 'react-hashtag';
 import SweetAlert from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -12,6 +11,8 @@ import Cloud from '../../assets/icons/cloud.svg';
 import styles from '../../styles/components/layout/postCard.module.scss';
 import Button from '../base/Button';
 import { useSubsocial } from '../provider';
+
+import HashTag from './Hashtag';
 
 export default function PostCard ({ post, onInput }: PropTypes) {
 	const { data: session } = useSession();
@@ -113,32 +114,33 @@ export default function PostCard ({ post, onInput }: PropTypes) {
 				/>
 			</div>
 			<div className={styles.content}>
-				<p className={styles.postText}>
-					<ReactHashtag onHashtagClick={onInput}>
-						{text}
-					</ReactHashtag>
-				</p>
+				<HashTag textClass={styles.postText} hashtagClass={styles.hashtag}
+					usernameClass={styles.username} value={text}
+					onClick={(val) => onInput(val, true)}
+				/>
 			</div>
 		</div>
 	);
 }
 
+export interface PostType {
+	id_str: string;
+	created_at: string;
+	text: string;
+	lang: string;
+	entities: {
+		hashtags: string[];
+	};
+	user: {
+		name: string;
+		screen_name: string;
+		profile_image_url_https: string;
+	};
+}
+
 interface PropTypes {
 	onInput: (value: string) => void;
-	post: {
-		id: number;
-		created_at: string;
-		text: string;
-		lang: string;
-		entities: {
-			hashtags: string[];
-		};
-		user: {
-			name: string;
-			screen_name: string;
-			profile_image_url_https: string;
-		};
-	};
+	post: PostType;
 }
 
 interface ResultType {
