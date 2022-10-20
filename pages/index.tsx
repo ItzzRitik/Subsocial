@@ -28,16 +28,19 @@ const Home: NextPage = () => {
 			dispatch(fetchTweets(query));
 		}, 300),
 	).current;
+	const syncSearchQueryDebounced = useRef(
+		debounce(async (query) => {
+			setSearch(decodeURIComponent(query + ''));
+		}, 300),
+	).current;
 
 	useEffect(() => {
 		fetchTweetsDebounced(search);
 	}, [fetchTweetsDebounced, search]);
 
 	useEffect(() => {
-		if (!search) {
-			setSearch(decodeURIComponent(searchQuery + ''));
-		}
-	}, [search, searchQuery]);
+		syncSearchQueryDebounced(searchQuery);
+	}, [searchQuery, syncSearchQueryDebounced]);
 
 	const onInput = (value: string, push?: boolean) => {
 		setSearch(value);
